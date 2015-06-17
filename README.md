@@ -1,3 +1,9 @@
-# Waf
-This  is an Android DevelopmentFramwork developed by willard!
 # Waf简介
+# 目前Waf的主要模块
+# 使用Waf开发框架需要有以下权限：
+# 混淆时注意事项：
+# Network模块使用方法
+# Db模块使用方法
+# 其他工具使用方法
+# 关于 免责声明 感谢 联系方式 q群 
+
