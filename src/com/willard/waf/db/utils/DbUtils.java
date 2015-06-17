@@ -85,7 +85,7 @@ public class DbUtils {
                     try {
                         dao.dropDb();
                     } catch (DbException e) {
-                        LogUtils.e(e.getMessage(), e);
+                        DbLogUtils.e(e.getMessage(), e);
                     }
                 }
             }
@@ -750,7 +750,7 @@ public class DbUtils {
                         execNonQuery("DROP TABLE " + tableName);
                         Table.remove(this, tableName);
                     } catch (Throwable e) {
-                        LogUtils.e(e.getMessage(), e);
+                        DbLogUtils.e(e.getMessage(), e);
                     }
                 }
 
@@ -780,7 +780,7 @@ public class DbUtils {
     ///////////////////////////////////// exec sql /////////////////////////////////////////////////////
     private void debugSql(String sql) {
         if (debug) {
-            LogUtils.d(sql);
+            DbLogUtils.d(sql);
         }
     }
 

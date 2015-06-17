@@ -39,18 +39,11 @@ public class StringRequest extends Request<String> {
      * @param listener Listener to receive the String response
      * @param errorListener Error listener, or null to ignore errors
      */
-    public StringRequest(int method, String url, Listener<String> listener,
-            ErrorListener errorListener) {
-        super(method, url, errorListener);
+    public StringRequest(int method, String url,
+   		 Request.OnPreListener preListener,  Listener<String> listener, ErrorListener errorListener) {
+        super(method, url, preListener,errorListener);
         mListener = listener;
     }
-
-    
-    @Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	/**
      * Creates a new GET request.
@@ -59,8 +52,8 @@ public class StringRequest extends Request<String> {
      * @param listener Listener to receive the String response
      * @param errorListener Error listener, or null to ignore errors
      */
-    public StringRequest(String url, Listener<String> listener, ErrorListener errorListener) {
-        this(Method.GET, url, listener, errorListener);
+    public StringRequest(String url, Request.OnPreListener preListener, Listener<String> listener, ErrorListener errorListener) {
+        this(Method.GET, url, preListener, listener, errorListener);
     }
 
     @Override

@@ -49,14 +49,14 @@ public abstract class JsonRequest<T> extends Request<T> {
      *
      * @deprecated Use {@link #JsonRequest(int, String, String, Listener, ErrorListener)}.
      */
-    public JsonRequest(String url, String requestBody, Listener<T> listener,
-            ErrorListener errorListener) {
-        this(Method.DEPRECATED_GET_OR_POST, url, requestBody, listener, errorListener);
+    public JsonRequest(String url, String requestBody,
+    		 Request.OnPreListener preListener, Listener<T> listener,ErrorListener errorListener) {
+        this(Method.DEPRECATED_GET_OR_POST, url, requestBody, preListener, listener, errorListener);
     }
 
-    public JsonRequest(int method, String url, String requestBody, Listener<T> listener,
-            ErrorListener errorListener) {
-        super(method, url, errorListener);
+    public JsonRequest(int method, String url, String requestBody,
+    		 Request.OnPreListener preListener, Listener<T> listener,ErrorListener errorListener) {
+        super(method, url, preListener, errorListener);
         mListener = listener;
         mRequestBody = requestBody;
     }

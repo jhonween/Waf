@@ -35,7 +35,7 @@ import com.willard.waf.db.converter.ColumnConverter;
 import com.willard.waf.db.converter.ColumnConverterFactory;
 import com.willard.waf.db.sqlite.FinderLazyLoader;
 import com.willard.waf.db.sqlite.ForeignLazyLoader;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 
 public class ColumnUtils {
 
@@ -77,7 +77,7 @@ public class ColumnUtils {
             try {
                 getMethod = entityType.getDeclaredMethod(methodName);
             } catch (NoSuchMethodException e) {
-                LogUtils.d(methodName + " not exist");
+                DbLogUtils.d(methodName + " not exist");
             }
         }
 
@@ -98,7 +98,7 @@ public class ColumnUtils {
             try {
                 setMethod = entityType.getDeclaredMethod(methodName, field.getType());
             } catch (NoSuchMethodException e) {
-                LogUtils.d(methodName + " not exist");
+                DbLogUtils.d(methodName + " not exist");
             }
         }
 
@@ -238,7 +238,7 @@ public class ColumnUtils {
         try {
             return entityType.getDeclaredMethod(methodName);
         } catch (NoSuchMethodException e) {
-            LogUtils.d(methodName + " not exist");
+            DbLogUtils.d(methodName + " not exist");
         }
         return null;
     }
@@ -254,7 +254,7 @@ public class ColumnUtils {
         try {
             return entityType.getDeclaredMethod(methodName, field.getType());
         } catch (NoSuchMethodException e) {
-            LogUtils.d(methodName + " not exist");
+            DbLogUtils.d(methodName + " not exist");
         }
         return null;
     }

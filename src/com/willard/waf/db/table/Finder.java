@@ -7,7 +7,7 @@ import android.database.Cursor;
 
 import com.willard.waf.db.sqlite.ColumnDbType;
 import com.willard.waf.db.sqlite.FinderLazyLoader;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 import com.willard.waf.exception.DbException;
 
 /**
@@ -48,13 +48,13 @@ public class Finder extends Column {
             try {
                 value = new FinderLazyLoader(this, finderValue).getAllFromDb();//非懒加载情况,根据当前parent实体的id去child中查找符合targetColumnName=id的child的列表
             } catch (DbException e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         } else {
             try {
                 value = new FinderLazyLoader(this, finderValue).getFirstFromDb();//非懒加载情况
             } catch (DbException e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         }
 
@@ -62,14 +62,14 @@ public class Finder extends Column {
             try {
                 setMethod.invoke(entity, value);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         } else {
             try {
                 this.columnField.setAccessible(true);
                 this.columnField.set(entity, value);//如果是懒加载情况则返回一个FinderLazyLoader或ForeignLazyLoader代理类，如果不是懒加载则返回List<Object>或Object
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         }
     }

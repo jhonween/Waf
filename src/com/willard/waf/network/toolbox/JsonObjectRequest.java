@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import com.willard.waf.exception.ParseError;
 import com.willard.waf.network.NetworkResponse;
+import com.willard.waf.network.Request;
 import com.willard.waf.network.Response;
 import com.willard.waf.network.Response.ErrorListener;
 import com.willard.waf.network.Response.Listener;
@@ -42,20 +43,11 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonObjectRequest(int method, String url, String requestBody,
-                             Listener<JSONObject> listener, ErrorListener errorListener) {
-        super(method, url, requestBody, listener,
+    public JsonObjectRequest(int method, String url, String requestBody, Request.OnPreListener preListener,
+            Listener<JSONObject> listener, ErrorListener errorListener) {
+        super(method, url, requestBody, preListener, listener,
                 errorListener);
     }
-
-    
-    
-    @Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	/**
      * Creates a new request.
@@ -63,8 +55,9 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonObjectRequest(String url, Listener<JSONObject> listener, ErrorListener errorListener) {
-        super(Method.GET, url, null, listener, errorListener);
+    public JsonObjectRequest(String url, Request.OnPreListener preListener,
+            Listener<JSONObject> listener, ErrorListener errorListener) {
+        super(Method.GET, url, null, preListener, listener, errorListener);
     }
 
     /**
@@ -74,8 +67,9 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonObjectRequest(int method, String url, Listener<JSONObject> listener, ErrorListener errorListener) {
-        super(method, url, null, listener, errorListener);
+    public JsonObjectRequest(int method, String url, Request.OnPreListener preListener,
+            Listener<JSONObject> listener, ErrorListener errorListener) {
+        super(method, url, null, preListener, listener, errorListener);
     }
 
     /**
@@ -87,9 +81,9 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonObjectRequest(int method, String url, JSONObject jsonRequest,
+    public JsonObjectRequest(int method, String url, JSONObject jsonRequest, Request.OnPreListener preListener,
             Listener<JSONObject> listener, ErrorListener errorListener) {
-        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), listener,
+        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), preListener, listener,
                 errorListener);
     }
 
@@ -99,10 +93,10 @@ public class JsonObjectRequest extends JsonRequest<JSONObject> {
      *
      * @see #JsonObjectRequest(int, String, JSONObject, Listener, ErrorListener)
      */
-    public JsonObjectRequest(String url, JSONObject jsonRequest, Listener<JSONObject> listener,
+    public JsonObjectRequest(String url, JSONObject jsonRequest, Request.OnPreListener preListener,
+            Listener<JSONObject> listener,
             ErrorListener errorListener) {
-        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest,
-                listener, errorListener);
+        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest, preListener, listener, errorListener);
     }
 
     @Override

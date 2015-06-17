@@ -38,7 +38,7 @@ public class ClearCacheRequest extends Request<Object> {
      * or null for none
      */
     public ClearCacheRequest(Cache cache, Runnable callback) {
-        super(Method.GET, null, null);
+        super(Method.GET, null, null, null);
         mCache = cache;
         mCallback = callback;
     }
@@ -53,15 +53,6 @@ public class ClearCacheRequest extends Request<Object> {
         }
         return true;
     }
-
-    
-    
-    @Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 	@Override
     public Priority getPriority() {

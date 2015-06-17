@@ -24,7 +24,7 @@ import com.willard.waf.db.converter.ColumnConverter;
 import com.willard.waf.db.converter.ColumnConverterFactory;
 import com.willard.waf.db.sqlite.ColumnDbType;
 import com.willard.waf.db.sqlite.ForeignLazyLoader;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 import com.willard.waf.exception.DbException;
 
 public class Foreign extends Column {
@@ -63,13 +63,13 @@ public class Foreign extends Column {
             try {
                 value = new ForeignLazyLoader(this, fieldValue).getAllFromDb();
             } catch (DbException e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         } else {
             try {
                 value = new ForeignLazyLoader(this, fieldValue).getFirstFromDb();
             } catch (DbException e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         }
 
@@ -77,14 +77,14 @@ public class Foreign extends Column {
             try {
                 setMethod.invoke(entity, value);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         } else {
             try {
                 this.columnField.setAccessible(true);
                 this.columnField.set(entity, value);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         }
     }
@@ -122,7 +122,7 @@ public class Foreign extends Column {
                         columnValue = column.getColumnValue(foreignEntities.get(0));
                     }
                 } catch (Throwable e) {
-                    LogUtils.e(e.getMessage(), e);
+                    DbLogUtils.e(e.getMessage(), e);
                 }
             } else {
                 try {
@@ -136,7 +136,7 @@ public class Foreign extends Column {
 
                     columnValue = column.getColumnValue(fieldValue);
                 } catch (Throwable e) {
-                    LogUtils.e(e.getMessage(), e);
+                    DbLogUtils.e(e.getMessage(), e);
                 }
             }
         }

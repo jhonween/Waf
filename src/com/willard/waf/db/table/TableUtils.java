@@ -25,7 +25,7 @@ import android.text.TextUtils;
 import com.willard.waf.db.annotation.Id;
 import com.willard.waf.db.annotation.Table;
 import com.willard.waf.db.converter.ColumnConverterFactory;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 public class TableUtils {
 
     private TableUtils() {
@@ -99,7 +99,7 @@ public class TableUtils {
                 addColumns2Map(entityType.getSuperclass(), primaryKeyFieldName, columnMap);
             }
         } catch (Throwable e) {
-            LogUtils.e(e.getMessage(), e);
+            DbLogUtils.e(e.getMessage(), e);
         }
     }
 

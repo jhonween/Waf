@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
- *
+ * Modified by jhonween
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -85,6 +86,9 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /** Listener interface for errors. */
     private final Response.ErrorListener mErrorListener;
 
+    /** Listener interface for preExecute */
+    public final Request.OnPreListener mPreListener;
+    
     /** Sequence number of this request, used to enforce FIFO ordering. */
     private Integer mSequence;
 
@@ -128,8 +132,8 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * @deprecated Use {@link #Request(int, String, com.android.volley.Response.ErrorListener)}.
      */
     @Deprecated
-    public Request(String url, Response.ErrorListener listener) {
-        this(Method.DEPRECATED_GET_OR_POST, url, listener);
+    public Request(String url, Request.OnPreListener preListener,Response.ErrorListener listener) {
+        this(Method.DEPRECATED_GET_OR_POST, url,preListener, listener);
     }
 
     /**
@@ -138,11 +142,12 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * delivery of responses is provided by subclasses, who have a better idea of how to deliver
      * an already-parsed response.
      */
-    public Request(int method, String url, Response.ErrorListener listener) {
+    public Request(int method, String url, Request.OnPreListener preListener, Response.ErrorListener listener) {
         mMethod = method;
         mUrl = url;
         mIdentifier = createIdentifier(method, url);
         mErrorListener = listener;
+        mPreListener=preListener;
         setRetryPolicy(new DefaultRetryPolicy());
 
         mDefaultTrafficStatsTag = findDefaultTrafficStatsTag(url);
@@ -610,7 +615,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
         }
     }
 
-    abstract protected void onPreExecute();
+//    abstract protected void onPreExecute();
 //    abstract protected void doInBackground();
 //    /** Listener interface for onPreExecute. */
 //    private final Request.OnPreListener mOnPreListener;

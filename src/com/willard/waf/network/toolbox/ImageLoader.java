@@ -250,7 +250,7 @@ public class ImageLoader {
 
     protected Request<Bitmap> makeImageRequest(String requestUrl, int maxWidth, int maxHeight,
             ScaleType scaleType, final String cacheKey) {
-        return new ImageRequest(requestUrl, new Listener<Bitmap>() {
+        return new ImageRequest(requestUrl,null, new Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 onGetImageSuccess(cacheKey, response);

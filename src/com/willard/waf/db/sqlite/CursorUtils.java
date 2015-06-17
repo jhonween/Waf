@@ -25,7 +25,7 @@ import com.willard.waf.db.table.Finder;
 import com.willard.waf.db.table.Id;
 import com.willard.waf.db.table.Table;
 import com.willard.waf.db.utils.DbUtils;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 
 public class CursorUtils {
 
@@ -66,7 +66,7 @@ public class CursorUtils {
             }
             return entity;
         } catch (Throwable e) {
-            LogUtils.e(e.getMessage(), e);
+            DbLogUtils.e(e.getMessage(), e);
         }
 
         return null;

@@ -71,9 +71,9 @@ public class ImageRequest extends Request<Bitmap> {
      * @param decodeConfig Format to decode the bitmap to
      * @param errorListener Error listener, or null to ignore errors
      */
-    public ImageRequest(String url, Response.Listener<Bitmap> listener, int maxWidth, int maxHeight,
+    public ImageRequest(String url, Request.OnPreListener preListener, Response.Listener<Bitmap> listener, int maxWidth, int maxHeight,
             ScaleType scaleType, Config decodeConfig, Response.ErrorListener errorListener) {
-        super(Method.GET, url, errorListener); 
+        super(Method.GET, url, preListener, errorListener); 
         setRetryPolicy(
                 new DefaultRetryPolicy(IMAGE_TIMEOUT_MS, IMAGE_MAX_RETRIES, IMAGE_BACKOFF_MULT));
         mListener = listener;
@@ -84,21 +84,14 @@ public class ImageRequest extends Request<Bitmap> {
     }
 
     
-    
-    @Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	/**
      * For API compatibility with the pre-ScaleType variant of the constructor. Equivalent to
      * the normal constructor with {@code ScaleType.CENTER_INSIDE}.
      */
     @Deprecated
-    public ImageRequest(String url, Response.Listener<Bitmap> listener, int maxWidth, int maxHeight,
+    public ImageRequest(String url, Request.OnPreListener preListener, Response.Listener<Bitmap> listener, int maxWidth, int maxHeight,
             Config decodeConfig, Response.ErrorListener errorListener) {
-        this(url, listener, maxWidth, maxHeight,
+        this(url, preListener, listener, maxWidth, maxHeight,
                 ScaleType.CENTER_INSIDE, decodeConfig, errorListener);
     }
     @Override

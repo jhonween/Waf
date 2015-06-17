@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import com.willard.waf.exception.ParseError;
 import com.willard.waf.network.NetworkResponse;
+import com.willard.waf.network.Request;
 import com.willard.waf.network.Response;
 import com.willard.waf.network.Request.Method;
 import com.willard.waf.network.Response.ErrorListener;
@@ -43,29 +44,23 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonArrayRequest(int method, String url, String requestBody,
-                            Listener<JSONArray> listener, ErrorListener errorListener) {
-        super(method, url, requestBody, listener,
+    public JsonArrayRequest(int method, String url, String requestBody, Request.OnPreListener preListener,
+            Listener<JSONArray> listener, ErrorListener errorListener) {
+        super(method, url, requestBody, preListener, listener,
                 errorListener);
     }
 
     
     
-    @Override
-	protected void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	/**
      * Creates a new request.
      * @param url URL to fetch the JSON from
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonArrayRequest(String url, Listener<JSONArray> listener, ErrorListener errorListener) {
-        super(Method.GET, url, null, listener, errorListener);
+    public JsonArrayRequest(String url, Request.OnPreListener preListener,
+            Listener<JSONArray> listener, ErrorListener errorListener) {
+        super(Method.GET, url, null, preListener, listener, errorListener);
     }
 
     /**
@@ -75,8 +70,8 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonArrayRequest(int method, String url, Listener<JSONArray> listener, ErrorListener errorListener) {
-        super(method, url, null, listener, errorListener);
+    public JsonArrayRequest(int method, String url, Listener<JSONArray> listener, Request.OnPreListener preListener, ErrorListener errorListener) {
+        super(method, url, null, preListener, listener, errorListener);
     }
 
     /**
@@ -88,9 +83,9 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonArrayRequest(int method, String url, JSONArray jsonRequest, 
+    public JsonArrayRequest(int method, String url, JSONArray jsonRequest, Request.OnPreListener preListener,
             Listener<JSONArray> listener, ErrorListener errorListener) {
-        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), listener,
+        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), preListener, listener,
                 errorListener);
     }
 
@@ -103,9 +98,9 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      * @param listener Listener to receive the JSON response
      * @param errorListener Error listener, or null to ignore errors.
      */
-    public JsonArrayRequest(int method, String url, JSONObject jsonRequest,
-                            Listener<JSONArray> listener, ErrorListener errorListener) {
-        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), listener,
+    public JsonArrayRequest(int method, String url, JSONObject jsonRequest, Request.OnPreListener preListener,
+            Listener<JSONArray> listener, ErrorListener errorListener) {
+        super(method, url, (jsonRequest == null) ? null : jsonRequest.toString(), preListener, listener,
                 errorListener);
     }
 
@@ -115,10 +110,10 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      *
      * @see #JsonArrayRequest(int, String, JSONArray, Listener, ErrorListener)
      */
-    public JsonArrayRequest(String url, JSONArray jsonRequest, Listener<JSONArray> listener,
+    public JsonArrayRequest(String url, JSONArray jsonRequest, Request.OnPreListener preListener,
+            Listener<JSONArray> listener,
                             ErrorListener errorListener) {
-        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest,
-                listener, errorListener);
+        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest, preListener, listener, errorListener);
     }
 
     /**
@@ -127,10 +122,10 @@ public class JsonArrayRequest extends JsonRequest<JSONArray> {
      *
      * @see #JsonArrayRequest(int, String, JSONObject, Listener, ErrorListener)
      */
-    public JsonArrayRequest(String url, JSONObject jsonRequest, Listener<JSONArray> listener,
+    public JsonArrayRequest(String url, JSONObject jsonRequest, Request.OnPreListener preListener,
+            Listener<JSONArray> listener,
                              ErrorListener errorListener) {
-        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest,
-                listener, errorListener);
+        this(jsonRequest == null ? Method.GET : Method.POST, url, jsonRequest, preListener, listener, errorListener);
     }
 
     @Override

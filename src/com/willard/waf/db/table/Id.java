@@ -19,7 +19,7 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 
 import com.willard.waf.db.annotation.NoAutoIncrement;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 
 public class Id extends Column {
 
@@ -51,14 +51,14 @@ public class Id extends Column {
             try {
                 setMethod.invoke(entity, idValue);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         } else {
             try {
                 this.columnField.setAccessible(true);
                 this.columnField.set(entity, idValue);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         }
     }

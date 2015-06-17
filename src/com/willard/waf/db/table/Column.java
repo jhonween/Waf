@@ -23,7 +23,7 @@ import android.database.Cursor;
 import com.willard.waf.db.converter.ColumnConverter;
 import com.willard.waf.db.converter.ColumnConverterFactory;
 import com.willard.waf.db.sqlite.ColumnDbType;
-import com.willard.waf.db.utils.LogUtils;
+import com.willard.waf.db.utils.DbLogUtils;
 
 public class Column {
 
@@ -63,14 +63,14 @@ public class Column {
             try {
                 setMethod.invoke(entity, value == null ? defaultValue : value);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         } else {
             try {
                 this.columnField.setAccessible(true);
                 this.columnField.set(entity, value == null ? defaultValue : value);
             } catch (Throwable e) {
-                LogUtils.e(e.getMessage(), e);
+                DbLogUtils.e(e.getMessage(), e);
             }
         }
     }
@@ -88,14 +88,14 @@ public class Column {
                 try {
                     fieldValue = getMethod.invoke(entity);
                 } catch (Throwable e) {
-                    LogUtils.e(e.getMessage(), e);
+                    DbLogUtils.e(e.getMessage(), e);
                 }
             } else {
                 try {
                     this.columnField.setAccessible(true);
                     fieldValue = this.columnField.get(entity);
                 } catch (Throwable e) {
-                    LogUtils.e(e.getMessage(), e);
+                    DbLogUtils.e(e.getMessage(), e);
                 }
             }
         }

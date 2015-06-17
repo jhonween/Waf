@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2013. wyouflf (wyouflf@gmail.com)
- *
+ * Modified by jhonween
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,11 +28,11 @@ import android.util.Log;
  * Date: 13-7-24
  * Time: 下午12:23
  */
-public class LogUtils {
+public class DbLogUtils {
 
     public static String customTagPrefix = "";
 
-    private LogUtils() {
+    private DbLogUtils() {
     }
 
     public static boolean allowD = true;
