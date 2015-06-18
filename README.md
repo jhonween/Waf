@@ -99,33 +99,17 @@ public class MyBitmapLruCache implements ImageCache {
  }
   ```
   * 使用Cache 
-
 ```java
-HttpUtils http = new HttpUtils();
-/**使用自定义Cache  */ 
+	/**使用自定义Cache  */ 
     	mImageLoader = new ImageLoader(mVolleyQueue,
 			  new MyBitmapLruCache(this));
-		//使用框架缓存工具类CacheUtil获取Cache
-		mImageLoader = new ImageLoader(mVolleyQueue,
+	//使用框架缓存工具类CacheUtil获取Cache
+	mImageLoader = new ImageLoader(mVolleyQueue,
 				CacheUtil.getBitmapCacheInstance(this));
-		//使用框架缓存类
-		int mcacheSize = 99999;
-		mImageLoader = new ImageLoader(mVolleyQueue,
+	//使用框架缓存类
+	int mcacheSize = 99999;
+	mImageLoader = new ImageLoader(mVolleyQueue,
 				new BitmapLruCache(mcacheSize) );
-
-        @Override
-        public void onSuccess(ResponseInfo<String> responseInfo) {
-            textView.setText(responseInfo.result);
-        }
-
-        @Override
-        public void onStart() {
-        }
-
-        @Override
-        public void onFailure(HttpException error, String msg) {
-        }
-});
 ```
   
 ## Network模块使用方法
