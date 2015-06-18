@@ -98,8 +98,8 @@ public class MyBitmapLruCache implements ImageCache {
 	}
  }
   ```
-  * 使用Cache
-  ```java
+  * 使用Cache       
+  ```java  
   	...
     	//使用自定义Cache
     	mImageLoader = new ImageLoader(mVolleyQueue,
@@ -112,7 +112,7 @@ public class MyBitmapLruCache implements ImageCache {
 		mImageLoader = new ImageLoader(mVolleyQueue,
 				new BitmapLruCache(mcacheSize) );
         ...
-  ```
+  ```  
   
 ## Network模块使用方法
 ## Db模块使用方法
