@@ -31,16 +31,16 @@
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   ```
-# 混淆时注意事项：
+## 混淆时注意事项：
  * 添加Android默认混淆配置${sdk.dir}/tools/proguard/proguard-android.txt
  * 不要混淆注解类型，添加混淆配置：-keep class * extends java.lang.annotation.Annotation { *; }
  * 对使用Db模块持久化的实体类不要混淆，或者注解所有表和列名称@Table(name="xxx")，@Id(column="xxx")，@Column(colum       n="xxx"),@Foreign(column="xxx",foreign="xxx")；  
  
 
-# Cache缓存模块
+## Cache缓存模块
 
-# Network模块使用方法
-# Db模块使用方法
-# 其他工具使用方法
-# 关于 免责声明 感谢 联系方式 q群 
+## Network模块使用方法
+## Db模块使用方法
+## 其他工具使用方法
+## 关于 免责声明 感谢 联系方式 q群 
 
