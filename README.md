@@ -99,7 +99,7 @@ public class MyBitmapLruCache implements ImageCache {
  }
   ```
   * 使用Cache       
-  ```java  
+ ```java
   	...
     	/**使用自定义Cache  */  <br/>        
     	mImageLoader = new ImageLoader(mVolleyQueue,
