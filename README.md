@@ -9,7 +9,7 @@
   (5)提供了常用的缓存方式。包含了内存缓存、文件缓存<br/>
 ## 目前Waf的主要模块
   * Cache模块：  
-    > 提供了现成的几个缓存类和工具类，可随意选择所需的缓存，包括内存缓存和文件缓存;  
+    > * 提供了现成的几个缓存类和工具类，可随意选择所需的缓存，包括内存缓存和文件缓存;  
     > * 包含了网络缓存和图片缓存接口，通过实现该接口可自定义自己的缓存类，用作网络请求的缓存类。     
   * NetWork模块：   
     > * 请求采用异步方式处理，并使用工作队列处理异步请求；   
@@ -38,7 +38,82 @@
  
 
 ## Cache缓存模块
+ * 以图片缓存举例，自定义MyBitmapLruCache
+ ```java
+public class MyBitmapLruCache implements ImageCache {
+	/** Get the maximum number of bytes the heap can expand to*/
+	private static final int MAX_LRU_MEMORY = (int) Runtime.getRuntime().maxMemory();
+	/** The ratio of the MAX_LRU_MEMORY can allocate to the app */
+	private static int mRatio=8;
+	private DiskBitmapCache mDiskBitmapCache;
+	private BitmapLruCache mBitmapLruCache;
 
+	public MyBitmapLruCache(int maxLruSize, File rootDirectory, int maxDiskSize) {
+		mBitmapLruCache = new BitmapLruCache(maxLruSize);
+		mDiskBitmapCache = new DiskBitmapCache(rootDirectory, maxDiskSize);
+	}
+
+	public MyBitmapLruCache(int maxLruSize, File rootDirectory) {
+		mBitmapLruCache = new BitmapLruCache(maxLruSize);
+		mDiskBitmapCache = new DiskBitmapCache(rootDirectory);
+	}
+
+	public MyBitmapLruCache(int maxLruSize, Context context) {
+		mBitmapLruCache = new BitmapLruCache(maxLruSize);
+		mDiskBitmapCache = new DiskBitmapCache(context.getCacheDir());
+	}
+
+	public MyBitmapLruCache(Context context) {
+		int mcacheSize = MAX_LRU_MEMORY/mRatio;
+		mBitmapLruCache = new BitmapLruCache(mcacheSize);
+		mDiskBitmapCache = new DiskBitmapCache(context.getCacheDir());
+	}
+	...
+
+	@Override
+	public Bitmap getBitmap(String url) {
+		if (mBitmapLruCache != null && mBitmapLruCache.getBitmap(url) != null) {
+			System.out.println("######## BitmapCache GET ######## " + url);
+			return mBitmapLruCache.getBitmap(url);
+		}
+		if (mDiskBitmapCache != null && mDiskBitmapCache.getBitmap(url) != null) {
+			Bitmap bitmap = mDiskBitmapCache.getBitmap(url);
+			if (mBitmapLruCache != null) {
+				mBitmapLruCache.putBitmap(url, bitmap);
+			}
+			return bitmap;
+		}
+		return null;
+	}
+
+	@Override
+	public void putBitmap(String url, Bitmap bitmap) {
+		System.out.println("######## BitmapCache PUT ######## " + url);
+		if (mBitmapLruCache != null) {
+			mBitmapLruCache.putBitmap(url, bitmap);
+		}
+		if (mDiskBitmapCache != null) {
+			mDiskBitmapCache.putBitmap(url, bitmap);
+		}
+	}
+ }
+  ```
+  * 使用Cache
+  \\12
+  ```java
+    //使用自定义Cache
+    mImageLoader = new ImageLoader(mVolleyQueue,
+			  new MyBitmapLruCache(this));
+		//使用框架缓存工具类CacheUtil获取Cache
+		mImageLoader = new ImageLoader(mVolleyQueue,
+				CacheUtil.getBitmapCacheInstance(this));
+		//使用框架缓存类
+		int mcacheSize = 99999;
+		mImageLoader = new ImageLoader(mVolleyQueue,
+				new BitmapLruCache(mcacheSize) );
+		....
+  ```
+  
 ## Network模块使用方法
 ## Db模块使用方法
 ## 其他工具使用方法
