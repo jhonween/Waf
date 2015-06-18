@@ -98,12 +98,10 @@ public class MyBitmapLruCache implements ImageCache {
 	}
  }
   ```
-  * 使用Cache       
- ```java
-    	StringBuilder strBuilder = new StringBuilder();   <br/>  
-    	mImageLoader = new ImageLoader(mVolleyQueue,
-			  new MyBitmapLruCache(this));
-        ...
+  * 使用Cache 
+   ```java
+	public class MyBitmapLruCache implements ImageCache {
+	}
   ```  
   
 ## Network模块使用方法
