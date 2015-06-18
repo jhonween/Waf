@@ -38,7 +38,7 @@
  
 
 ## Cache缓存模块
- * 以图片缓存举例，自定义MyBitmapLruCache
+  * 以图片缓存举例，自定义MyBitmapLruCache
  ```java
 public class MyBitmapLruCache implements ImageCache {
 	/** Get the maximum number of bytes the heap can expand to*/
@@ -99,7 +99,6 @@ public class MyBitmapLruCache implements ImageCache {
  }
   ```
   * 使用Cache
-  \\12
   ```java
     //使用自定义Cache
     mImageLoader = new ImageLoader(mVolleyQueue,
