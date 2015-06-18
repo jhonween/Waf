@@ -417,6 +417,18 @@ public class MyBitmapLruCache implements ImageCache {
 				
        ```
 
-## 其他工具使用方法
+## 其他工具介绍
+   * LogUtil.java  日志工具类    
+    ```java   
+   	private static final String clazzName=MainActivity.class.getSimpleName();
+   	....
+   	LogUtil.d(clazzName,"MainActivity");	 
+   
+      ```
+   * SharePreferenceUtil.java  SharePreference工具类
+   * BitmapUtil.java 图片处理工具类
+   * MathUtil.java 数学运算工具类
+   * StreamUtil.java 流处理工具类
+   
 ## 关于 免责声明 感谢 联系方式 q群 
 
