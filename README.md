@@ -24,6 +24,9 @@
   Exception模块：     
   &nbsp;&nbsp;&nbsp;提供了各类运行时异常和非运行时异常基类和子类，用户可直接使用该类或扩展该类进行使用。     
 # 使用Waf开发框架需要有以下权限：
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 # 混淆时注意事项：
 # Cache缓存模块
 # Network模块使用方法
