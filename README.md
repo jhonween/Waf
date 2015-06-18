@@ -99,6 +99,7 @@ public class MyBitmapLruCache implements ImageCache {
  }
   ```
   * 使用Cache 
+  * 
    ```java
 	public class MyBitmapLruCache implements ImageCache {
 	}
