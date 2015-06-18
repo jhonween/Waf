@@ -431,10 +431,11 @@ public class MyBitmapLruCache implements ImageCache {
    * StreamUtil.java 流处理工具类
    
 
-## 关于 免责声明 感谢 联系方式 q群 
+## 关于 
    * Waf是一个Android的开源框架，在写这个框架之前，作者研究了一些目前主流的一些Android框架，包括了其原理和使用方法，发现每个框架都有其好的部分，也有不足的地方，为了能使用这些框架的优势部分，于是作者便有了开发Waf框架的想法，因此Waf框架结合了部分开源框架的部分模块，有volley和xUtils的db模块，选用这两个模块是因为作者觉得volley的网络通信模块写的不错，而xUtils的db模块封装的不错。同时，Waf也根据这两个模块存在的问题进行了修改优化并加入了一些功能。另外除了这两个模块，Waf也包含了Cache模块和Exception模块。
-   * 感谢Mani Selvaraj ,wyouflf
-   * 由于本人的Android开发水平有限，开发的框架难免会出现一些问题，对于有任何建议或者使用中遇到问题都可以给我发邮件。
+   * 感谢Mani Selvaraj ,wyouflf。在开发Waf的过程中,参考了这些人的开源项目。
+   * Waf严格遵守了开源项目的规定，对于有引用其他文件的文件进行了引用声明，对于存在的地方，请联系作者，作者会及时纠正。
+   * 由于本人的Android开发水平有限，开发的框架难免会出现一些问题，对于有任何建议或者使用中遇到问题都可以给我发邮件,同时也欢迎各位的加入一起完善该项目。
    * Email： <273581910@qq.com>, <wodekjwozz@163.com>
 
 
