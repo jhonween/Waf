@@ -101,6 +101,8 @@ public class MyBitmapLruCache implements ImageCache {
   * 使用Cache       
  ```java
     	StringBuilder strBuilder = new StringBuilder();
+    	mImageLoader = new ImageLoader(mVolleyQueue,
+			  new MyBitmapLruCache(this));
         ...
   ```  
   
