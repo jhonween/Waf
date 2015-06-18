@@ -12,18 +12,18 @@
     * 提供了现成的几个缓存类和工具类，可随意选择所需的缓存，包括内存缓存和文件缓存;  
     * 包含了网络缓存和图片缓存接口，通过实现该接口可自定义自己的缓存类，用作网络请求的缓存类。     
   * NetWork模块：   
-    > * 请求采用异步方式处理，并使用工作队列处理异步请求；   
-    > * 使用了CacheDispatcher和NetworkDispatcher分别对缓存请求和网络请求进行分发处理；   
-    > * 提供了多种请求方式，如StringRequest、JsonRequest、ImageRequest对不同类型的请求进行处理；   
-    > * 扩展性强。框架大部分基于接口进行设计。   
+    * 请求采用异步方式处理，并使用工作队列处理异步请求；   
+    * 使用了CacheDispatcher和NetworkDispatcher分别对缓存请求和网络请求进行分发处理；   
+    * 提供了多种请求方式，如StringRequest、JsonRequest、ImageRequest对不同类型的请求进行处理；   
+    * 扩展性强。框架大部分基于接口进行设计。   
   * Db模块:   
-    > * 提供了ORM框架。简化了对数据库的操作；  
-    > * 提供了注解对表进行定义，自动创建表和数据库；      
-    > * 支持延时加载；      
-    > * 支持事务处理；     
-    > * 支持各数据库操作。        
+    * 提供了ORM框架。简化了对数据库的操作；  
+    * 提供了注解对表进行定义，自动创建表和数据库；      
+    * 支持延时加载；      
+    * 支持事务处理；     
+    * 支持各数据库操作。        
   * Exception模块：     
-    > * 提供了各类运行时异常和非运行时异常基类和子类，用户可直接使用该类或扩展该类进行使用。<br/>  
+    * 提供了各类运行时异常和非运行时异常基类和子类，用户可直接使用该类或扩展该类进行使用。<br/>  
 
 ## 使用Waf开发框架需要有以下权限：
   ```xml
@@ -100,8 +100,9 @@ public class MyBitmapLruCache implements ImageCache {
   ```
   * 使用Cache
   ```java
-    //使用自定义Cache
-    mImageLoader = new ImageLoader(mVolleyQueue,
+  	...
+    	//使用自定义Cache
+    	mImageLoader = new ImageLoader(mVolleyQueue,
 			  new MyBitmapLruCache(this));
 		//使用框架缓存工具类CacheUtil获取Cache
 		mImageLoader = new ImageLoader(mVolleyQueue,
@@ -110,7 +111,7 @@ public class MyBitmapLruCache implements ImageCache {
 		int mcacheSize = 99999;
 		mImageLoader = new ImageLoader(mVolleyQueue,
 				new BitmapLruCache(mcacheSize) );
-		....
+        ...
   ```
   
 ## Network模块使用方法
