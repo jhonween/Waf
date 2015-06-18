@@ -101,7 +101,7 @@ public class MyBitmapLruCache implements ImageCache {
   * 使用Cache       
   ```java  
   	...
-    	//使用自定义Cache
+    	//使用自定义Cache <br/>
     	mImageLoader = new ImageLoader(mVolleyQueue,
 			  new MyBitmapLruCache(this));
 		//使用框架缓存工具类CacheUtil获取Cache
