@@ -25,82 +25,91 @@ import android.content.Context;
  * @2015-6-12
  */
 public class CacheUtil {
-	public final static CacheUtil instance = new CacheUtil();
 	private static BitmapCache mBitmapCacheInstance;
-	private static BitmapLruCache mBitmapLruCacheInstance;
+	// private static BitmapLruCache mBitmapLruCacheInstance;
 	private static DiskBitmapCache mDiskBitmapCacheInstance;
-	private static NoCache mNoCacheInstance;
+	// private static NoCache mNoCacheInstance;
 	private static DiskBasedCache mDiskBasedCache;
-	private CacheUtil()
-	{
-		
+
+	private CacheUtil() {
+
 	}
-	public static CacheUtil getInstance()
-	{
-		return CacheUtil.instance;
+
+	// private static class InstanceHolder {
+	// private final static CacheUtil instance = new CacheUtil();
+	// }
+
+	/**
+	 * Lazy singleton
+	 * 
+	 * @CacheUtil.java
+	 * @author willard
+	 * @2015-6-19
+	 */
+	private static class NoCacheInstanceHolder {
+		private final static NoCache instance = new NoCache();
 	}
-	
-	public static NoCache getNoCacheInstance()
-	{
-		if (mNoCacheInstance == null)
-		{
-			mNoCacheInstance = new NoCache();
-		}
-		return mNoCacheInstance;
+
+	// public static CacheUtil getInstance() {
+	// return InstanceHolder.instance;
+	// }
+
+	public static NoCache getNoCacheInstance() {
+		return NoCacheInstanceHolder.instance;
+
 	}
-	
-	public static DiskBasedCache getDiskBasedCacheInstance(File cacheDir)
-	{
-		if (mDiskBasedCache == null)
-		{
-			mDiskBasedCache = new DiskBasedCache(cacheDir);
+
+	public static DiskBasedCache getDiskBasedCacheInstance(File cacheDir) {
+		if (mDiskBasedCache == null) {
+			synchronized (DiskBasedCache.class) {
+				DiskBasedCache temp = mDiskBasedCache;
+				if (temp == null) {
+					temp = new DiskBasedCache(cacheDir);
+					mDiskBasedCache = temp;
+				}
+			}
 		}
 		return mDiskBasedCache;
 	}
-	
-	public static DiskBasedCache getDiskBasedCacheInstance(File cacheDir, int maxCacheSizeInBytes)
-	{
-		if (mDiskBasedCache == null)
-		{
-			mDiskBasedCache = new DiskBasedCache(cacheDir,maxCacheSizeInBytes);
-		}
-		return mDiskBasedCache;
-	}
-	
-	public static BitmapCache getBitmapCacheInstance(Context context)
-	{
-		if (mBitmapCacheInstance == null)
-		{
-			mBitmapCacheInstance = new BitmapCache(context);
+
+	/**
+	 * Double Lock singleton
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public static BitmapCache getBitmapCacheInstance(Context context) {
+		if (mBitmapCacheInstance == null) {
+			synchronized (BitmapCache.class) {
+				BitmapCache temp = mBitmapCacheInstance;
+				if (temp == null) {
+					temp = new BitmapCache(context);
+					mBitmapCacheInstance = temp;
+				}
+			}
 		}
 		return mBitmapCacheInstance;
 	}
-	
-	public static BitmapLruCache getBitmapLruCacheInstance(int maxSize)
-	{
-		if (mBitmapLruCacheInstance == null)
-		{
-			mBitmapLruCacheInstance = new BitmapLruCache(maxSize);
-		}
-		return mBitmapLruCacheInstance;
+
+	private static class BitmapLruCacheInstanceHolder {
+		private final static BitmapLruCache instance = new BitmapLruCache();
 	}
-	
-	public static DiskBitmapCache getDiskBitmapCacheInstance(File cacheDir)
-	{
-		if (mDiskBitmapCacheInstance == null)
-		{
-			mDiskBitmapCacheInstance = new DiskBitmapCache(cacheDir);
-		}
-		return mDiskBitmapCacheInstance;
+
+	public static BitmapLruCache getBitmapLruCacheInstance() {
+		return BitmapLruCacheInstanceHolder.instance;
 	}
-	
-	public static DiskBitmapCache getDiskBitmapCacheInstance(File cacheDir, int maxCacheSizeInBytes)
-	{
-		if (mDiskBitmapCacheInstance == null)
-		{
-			mDiskBitmapCacheInstance = new DiskBitmapCache(cacheDir,maxCacheSizeInBytes);
+
+	public static DiskBitmapCache getDiskBitmapCacheInstance(File cacheDir) {
+		if (mDiskBitmapCacheInstance == null) {
+			synchronized (DiskBitmapCache.class) {
+				DiskBitmapCache temp = mDiskBitmapCacheInstance;
+				if (temp == null) {
+					temp = new DiskBitmapCache(cacheDir);
+					mDiskBitmapCacheInstance = temp;
+				}
+			}
 		}
 		return mDiskBitmapCacheInstance;
 	}
-	
+
 }

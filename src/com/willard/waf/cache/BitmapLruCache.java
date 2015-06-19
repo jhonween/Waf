@@ -1,6 +1,6 @@
-/**
- * Copyright 2013 Mani Selvaraj
- *
+/*
+ * Copyright 2015 jhonween
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.willard.waf.cache;
 
 import android.graphics.Bitmap;
@@ -22,20 +21,26 @@ import android.support.v4.util.LruCache;
 import com.willard.waf.network.toolbox.ImageLoader.ImageCache;
 
 /**
- * LruCache: For caches that do not override sizeOf(K, V), this is the maximum number of entries in the cache. 
- * For all other caches, this is the maximum sum of the sizes of the entries in this cache.
- * Ref:http://developer.android.com/reference/android/util/LruCache.html#LruCache(int)
- * 
- * Currently, the cache keeps maximum of 100 Cache entries.
- * @author Mani Selvaraj
- *
+ * @BitmapLruCache.java
+ * @author willard
+ * @2015-6-19
  */
 public class BitmapLruCache extends LruCache<String,Bitmap> implements ImageCache {
+	/** Get the maximum number of bytes the heap can expand to*/
+	private static final int MAX_LRU_MEMORY = (int) Runtime.getRuntime().maxMemory();
     public BitmapLruCache(int maxSize) {
         super(maxSize);
-        //or setLimit(Runtime.getRuntime().maxMemory()/4);
     }
     
+    public BitmapLruCache() {
+        super(MAX_LRU_MEMORY/4);
+    }
+    
+    /**
+     * Override the sizeOf
+     * It mean that it will occupy how many numbers of bytes
+     * default 1 
+     */
     @Override
     protected int sizeOf(String key, Bitmap value) {
         return value.getRowBytes() * value.getHeight();
@@ -43,13 +48,11 @@ public class BitmapLruCache extends LruCache<String,Bitmap> implements ImageCach
  
     @Override
     public Bitmap getBitmap(String url) {
-    	System.out.println("######## BitmapLruCache GET ######## "+url);
         return (Bitmap)get(url);
     }
  
     @Override
     public void putBitmap(String url, Bitmap bitmap) {
-    	System.out.println("######## BitmapLruCache PUT ######## "+url);
         put(url, bitmap);
     }
 }
